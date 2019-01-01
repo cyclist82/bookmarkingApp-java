@@ -32,6 +32,14 @@ public abstract class Bookmark {
 		this.profileUrl = profileUrl;
 	}
 
+	public String getKidFriendlyStatus() {
+		return kidFriendlyStatus;
+	}
+
+	public void setKidFriendlyStatus(String kidFriendlyStatus) {
+		this.kidFriendlyStatus = kidFriendlyStatus;
+	}
+
 	public abstract boolean isKidFriendlyEligible();
 
 	@Override
