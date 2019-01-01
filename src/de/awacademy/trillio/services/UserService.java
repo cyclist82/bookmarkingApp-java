@@ -1,10 +1,12 @@
 package de.awacademy.trillio.services;
 
+import de.awacademy.trillio.dao.UserDao;
 import de.awacademy.trillio.entities.User;
 
 public class UserService {
 
 	private static UserService instance = new UserService();
+	private static UserDao dao = new UserDao();
 
 	private UserService() {
 	}
@@ -23,5 +25,9 @@ public class UserService {
 		user.setGender(gender);
 		user.setUserType(userType);
 		return user;
+	}
+
+	public User[] getUsers() {
+		return dao.getUsers();
 	}
 }
