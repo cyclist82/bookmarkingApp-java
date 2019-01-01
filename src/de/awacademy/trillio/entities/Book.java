@@ -1,5 +1,7 @@
 package de.awacademy.trillio.entities;
 
+import de.awacademy.trillio.constants.BookGenre;
+
 import java.util.Arrays;
 
 public class Book extends Bookmark {
@@ -58,5 +60,13 @@ public class Book extends Bookmark {
 				", genre='" + genre + '\'' +
 				", amazonRating=" + amazonRating +
 				"} " + super.toString();
+	}
+
+	@Override
+	public boolean isKidFriendlyEligible() {
+		if (genre.equals(BookGenre.PHILOSOPHY) || genre.equals(BookGenre.SELF_HELP)) {
+			return false;
+		}
+		return true;
 	}
 }

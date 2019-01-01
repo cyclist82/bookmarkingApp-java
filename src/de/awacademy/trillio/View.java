@@ -11,7 +11,7 @@ public class View {
 			int typeOffset = (int) (Math.random() * DataStore.BOOKMARK_TYPES_COUNT);
 			int bookmarkOffset = (int) (Math.random() * DataStore.BOOKMARK_COUNT_PER_TYPE);
 			Bookmark bookmark = bookmarks[typeOffset][bookmarkOffset];
-			BookmarkController.getInstance().saveUserBookmark(user,bookmark);
+			BookmarkController.getInstance().saveUserBookmark(user, bookmark);
 			System.out.println(bookmark);
 		}
 	}

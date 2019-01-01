@@ -1,9 +1,12 @@
 package de.awacademy.trillio.entities;
 
-public class Bookmark {
+import de.awacademy.trillio.constants.KidFriendlyStatus;
+
+public abstract class Bookmark {
 	private long id;
 	private String title;
 	private String profileUrl;
+	private String kidFriendlyStatus = KidFriendlyStatus.UNKNOWN;
 
 	public long getId() {
 		return id;
@@ -28,6 +31,8 @@ public class Bookmark {
 	public void setProfileUrl(String profileUrl) {
 		this.profileUrl = profileUrl;
 	}
+
+	public abstract boolean isKidFriendlyEligible();
 
 	@Override
 	public String toString() {
