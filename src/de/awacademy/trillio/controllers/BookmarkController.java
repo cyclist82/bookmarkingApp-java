@@ -16,6 +16,10 @@ public class BookmarkController {
 	}
 
 	public void saveUserBookmark(User user, Bookmark bookmark) {
-		BookmarkService.getInstance().saveUserBookmark(user,bookmark);
+		BookmarkService.getInstance().saveUserBookmark(user, bookmark);
+	}
+
+	public void share(User user, Bookmark bookmark) {
+		BookmarkService.getInstance().share(user, bookmark);
 	}
 }

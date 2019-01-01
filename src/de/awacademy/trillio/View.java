@@ -5,6 +5,8 @@ import de.awacademy.trillio.constants.UserType;
 import de.awacademy.trillio.controllers.BookmarkController;
 import de.awacademy.trillio.entities.Bookmark;
 import de.awacademy.trillio.entities.User;
+import de.awacademy.trillio.partner.Shareable;
+import de.awacademy.trillio.services.BookmarkService;
 
 public class View {
 
@@ -22,18 +24,28 @@ public class View {
 						System.out.println("New Item Bookmarked --" + bookmark);
 					}
 				}
-				// Mark as kid-friendly
 				if (user.getUserType().equals(UserType.EDITOR) || user.getUserType().equals(UserType.EDITOR)) {
+					// Mark as kid-friendly
 					if (bookmark.isKidFriendlyEligible() && bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.UNKNOWN)) {
 						String kidFriendlyStatus = getKidFriendlyStatusDecision(bookmark);
 						if (!kidFriendlyStatus.equals(KidFriendlyStatus.UNKNOWN)) {
-							bookmark.setKidFriendlyStatus(kidFriendlyStatus);
-							System.out.println("Kid-friendly status: " + kidFriendlyStatus + ", " + bookmark);
+							BookmarkService.getInstance().setKidFriendlyStatus(user, kidFriendlyStatus, bookmark);
+						}
+					}
+					// Sharing Bookmarks!!
+					if (bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.APPROVED) && bookmark instanceof Shareable) {
+						boolean isShared = getShareDecision();
+						if (isShared) {
+							BookmarkController.getInstance().share(user, bookmark);
 						}
 					}
 				}
 			}
 		}
+	}
+
+	private static boolean getShareDecision() {
+		return Math.random() < 0.5 ? true : false;
 	}
 
 	private static String getKidFriendlyStatusDecision(Bookmark bookmark) {
