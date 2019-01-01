@@ -19,6 +19,7 @@ public class DataStore {
 	private static User[] users = new User[TOTAL_USER_COUNT];
 	private static Bookmark[][] bookmarks = new Bookmark[BOOKMARK_TYPES_COUNT][BOOKMARK_COUNT_PER_TYPE];
 	private static UserBookmark[] userBookmarks = new UserBookmark[TOTAL_USER_COUNT * USER_BOOKMARK_LIMIT];
+	private static int bookmarkIndex = 0;
 
 	public static void loadData() {
 		loadUsers();
@@ -66,10 +67,10 @@ public class DataStore {
 
 	private static void loadBooks() {
 		bookmarks[2][0] = BookmarkService.getInstance().createBook(4000, "Walden", "-", 1854, "Wilder Publications", new String[]{"Henry David Thoreau"}, BookGenre.PHILOSOPHY, 4.3);
-		bookmarks[2][0] = BookmarkService.getInstance().createBook(4000, "Self-Reliance and Other Essays", "-", 1993, "Dover Publications", new String[]{"Ralph Waldo Emerson"}, BookGenre.PHILOSOPHY, 4.5);
-		bookmarks[2][0] = BookmarkService.getInstance().createBook(4000, "Light From Many Lamps", "-", 1988, "Touchstone", new String[]{"Lillian Eichler Watson"}, BookGenre.PHILOSOPHY, 5.0);
-		bookmarks[2][0] = BookmarkService.getInstance().createBook(4000, "Head First Design Patterns	Technical", "-", 2004, "O'Reilly Media", new String[]{"Eric Freeman", "Bert Bates", "Kathy Sierra", "Elisabeth Robson"}, BookGenre.TECHNICAL, 4.5);
-		bookmarks[2][0] = BookmarkService.getInstance().createBook(4000, "Effective Java Programming Language Guide", "-", 2007, "Prentice Hall", new String[]{"Joshua Bloch"}, BookGenre.TECHNICAL, 4.9);
+		bookmarks[2][1] = BookmarkService.getInstance().createBook(4000, "Self-Reliance and Other Essays", "-", 1993, "Dover Publications", new String[]{"Ralph Waldo Emerson"}, BookGenre.PHILOSOPHY, 4.5);
+		bookmarks[2][2] = BookmarkService.getInstance().createBook(4000, "Light From Many Lamps", "-", 1988, "Touchstone", new String[]{"Lillian Eichler Watson"}, BookGenre.PHILOSOPHY, 5.0);
+		bookmarks[2][3] = BookmarkService.getInstance().createBook(4000, "Head First Design Patterns	Technical", "-", 2004, "O'Reilly Media", new String[]{"Eric Freeman", "Bert Bates", "Kathy Sierra", "Elisabeth Robson"}, BookGenre.TECHNICAL, 4.5);
+		bookmarks[2][4] = BookmarkService.getInstance().createBook(4000, "Effective Java Programming Language Guide", "-", 2007, "Prentice Hall", new String[]{"Joshua Bloch"}, BookGenre.TECHNICAL, 4.9);
 	}
 
 	public static User[] getUsers() {
@@ -78,5 +79,10 @@ public class DataStore {
 
 	public static Bookmark[][] getBookmarks() {
 		return bookmarks;
+	}
+
+	public static void add(UserBookmark userBookmark) {
+		userBookmarks[bookmarkIndex]=userBookmark;
+		bookmarkIndex++;
 	}
 }

@@ -1,10 +1,7 @@
 package de.awacademy.trillio.services;
 
 import de.awacademy.trillio.dao.BookmarkDao;
-import de.awacademy.trillio.entities.Book;
-import de.awacademy.trillio.entities.Bookmark;
-import de.awacademy.trillio.entities.Movie;
-import de.awacademy.trillio.entities.WebLink;
+import de.awacademy.trillio.entities.*;
 
 public class BookmarkService {
 
@@ -56,5 +53,12 @@ public class BookmarkService {
 
 	public Bookmark[][] getBookmarks() {
 		return dao.getBookmarks();
+	}
+
+	public void saveUserBookmark(User user, Bookmark bookmark) {
+		UserBookmark userBookmark = new UserBookmark();
+		userBookmark.setUser(user);
+		userBookmark.setBookmark(bookmark);
+		dao.saveUserBookmark(userBookmark);
 	}
 }
